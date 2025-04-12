@@ -1,0 +1,139 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Page container */
+  .page-container {
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-color: #cdf1d0;
+  }
+  
+  /* Header section */
+  .page-header {
+    width: 100%;
+    height: 167px;
+    position: relative;
+  }
+  
+  .header-background {
+    width: 100%;
+    height: 164px;
+    box-shadow: 4px 15px 45.9px 76px rgba(201, 240, 201, 0.75);
+    background-color: #a0baa1;
+  }
+  
+  .header-logo {
+    width: 222px;
+    height: 167px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    mix-blend-mode: plus-darker;
+    box-shadow: 0px 10px 4px 0px rgba(255, 255, 255, 0.1);
+  }
+  
+  .header-title {
+    position: absolute;
+    width: 100%;
+    top: 15px;
+    color: #134715;
+    text-align: center;
+    text-shadow: 4px 10px 8px rgba(50, 10, 101, 0.25);
+    font-family: "KyivType Sans", sans-serif;
+    font-size: 92px;
+    font-weight: 700;
+  }
+  
+  /* Main content section */
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 34px;
+  }
+  
+  .rotated-square-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .rotated-square {
+    width: 100%;
+    height: 100%;
+    border: 5px solid #3e1833;
+    transform: rotate(46.076deg);
+    background-color: #d9d9d9;
+  }
+  
+  .match-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    text-align: center;
+    font-family: "Golos Text", sans-serif;
+    font-size: 75px;
+    font-weight: 400;
+    line-height: 80px;
+    letter-spacing: 0.1px;
+    width: 284px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 991px) {
+    .page-container {
+      max-width: 991px;
+    }
+  
+    .header-title {
+      font-size: 72px;
+    }
+  
+    .rotated-square-container {
+      width: 250px;
+      height: 250px;
+    }
+  
+    .match-text {
+      font-size: 60px;
+      line-height: 65px;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .page-container {
+      max-width: 640px;
+    }
+  
+    .header-logo {
+      width: 160px;
+      height: 121px;
+    }
+  
+    .header-title {
+      font-size: 48px;
+      padding: 0 20px;
+    }
+  
+    .rotated-square-container {
+      width: 200px;
+      height: 200px;
+    }
+  
+    .match-text {
+      font-size: 48px;
+      line-height: 52px;
+    }
+  }
+  
