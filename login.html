@@ -11,15 +11,41 @@
     <link rel="stylesheet" href="./styleLogin.css" />
   </head>
   <script>
-
+    let name = "temp"
+    let age = 25
+    let startGame = false
 
     function saveInfo(){
-      let age = document.querySelector('[data-dom-state="input-2"]').value
-      let name = document.querySelector('[data-dom-state="input-1"]').value
-      console.log(age)
-      console.log(name)
-      location.href='game.html'
-      localStorage.setItem('name', name) 
+      age = document.querySelector('[data-dom-state="input-2"]').value
+      name = document.querySelector('[data-dom-state="input-1"]').value
+      // console.log(age)
+      // console.log(name)
+
+      // if(name == ""){
+      //   window.alert("Please enter in all required information")
+      // }
+      
+      // if (startGame == true){
+      //   location.href='game.html'
+      // }
+
+      if(name == "" || age == ""){
+        document.getElementById('divIdSpeak').innerHTML = "Please enter in all required information"
+      }
+      else{
+
+          if(age > 17){
+            location.href='game.html'
+            localStorage.setItem('name', name)
+          }
+          else{
+            window.alert("You are not old enough to play!")
+            //document.getElementById('divIdSpeak').innerHTML = "You are not old enough to play!"
+            location.href='home.html'
+          }
+
+      }
+
     }
 
   </script>
@@ -56,14 +82,16 @@
 
         <main class="main-content">
           <section class="match-section">
-            <div onclick="saveInfo()" ;onclick="location.href='game.html'" onmouseover="this.style.cursor='pointer'; this.style.transform='scale(1.05)'" onmouseout="this.style.cursor='default'; this.style.transform='scale(1)'">
+            <div onclick="saveInfo()" ;onclick="location.href='game.html'" onmouseover="this.style.cursor='pointer'; 
+            this.style.transform='scale(1.05)'" onmouseout="this.style.cursor='default'; this.style.transform='scale(1)'">
               <div class="rotated-square"></div>
-              <p class="match-text">
+                <img src="arrow-image.png" alt="Arrow Button" class="arrow-image">
                 <span>Start the Game!!!</span>
-              </p>
             </div>
           </section>
         </main>
+
+        <div id="divIdSpeak"></div>
 
 </div>
       </div>
