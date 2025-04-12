@@ -18,13 +18,13 @@
     </style>
   </head>
   <script>
-    let name = "temp"
-    let age = 25
-    let startGame = false
+    let name = "temp";
+    let age = 25;
+    let startGame = false;
 
     function saveInfo(){
-      age = document.querySelector('[data-dom-state="input-2"]').value
-      name = document.querySelector('[data-dom-state="input-1"]').value
+      age = document.querySelector('[data-dom-state="input-2"]').value;
+      name = document.querySelector('[data-dom-state="input-1"]').value;
       // console.log(age)
       // console.log(name)
 
@@ -37,21 +37,23 @@
       // }
 
       if(name == "" || age == ""){
-        document.getElementById('divIdSpeak').innerHTML = "Please enter in all required information"
+        document.getElementById('divIdSpeak').innerHTML = "Please enter in all required information";
       }
       else{
 
           if(age > 17){
-            location.href='game.html'
-            localStorage.setItem('name', name)
+            location.href='game.html';
+            localStorage.setItem('name', name);
           }
           else{
-            window.alert("You are not old enough to play!")
+            window.alert("You are not old enough to play!");
             //document.getElementById('divIdSpeak').innerHTML = "You are not old enough to play!"
-            location.href='home.html'
+            location.href='home.html';
           }
 
       }
+
+      return name;
 
     }
 
