@@ -35,6 +35,38 @@
 
     </style>
 
+    
+  </head>
+  <body>
+    <main class="game-container">
+    <header  class="page-header">
+        <div class="header-background"></div>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6285e47162c89b7eb61eb5c7255dd68a9e075690" alt="Logo" class="header-logo" />
+        <h1 class="header-title">Meet Me &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Halfway</h1>
+        </header>
+
+      <canvas id="gameCanvas" class="game-canvas" width="1550" height="600">
+
+      </canvas>
+
+      <!-- <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0ae12c1cbb54df5653cd9163881b68bf79ec974b" alt="Road background" class="road-image" />
+
+      <section class="question-container">
+        <h2 class="question-text">Question sample</h2>
+      </section>
+
+      <div class = "road-marker2"></div>
+      <div class="road-marker"></div>
+      <div class = "road-marker3"></div>
+      
+
+      <section class="options-container">
+        <button class="option-button">Option 1</button>
+        <button class="option-button">Option 2</button>
+        <button class="option-button">Option 3</button>
+      </section> -->
+    </main>
+
     <script>
         let questionList = ["You’re reincarnated as a bathroom sign. What’s your legacy?",
                         "Your evil twin challenges you to a spaghetti duel. What’s your tactic?",
@@ -59,32 +91,54 @@
           let receivedValue = localStorage.getItem("name");
         console.log(receivedValue + " from local storage"); 
 
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const car_low = new Image();
+        car_low.src = './components/car.png'; // Replace with your image URL
+
+        const car_high = new Image();
+        car_high.src = './components/car2.png';
+
+        // Image position variables
+        let img_x_low = 0; // Starting X position
+        let img_y_low = canvas.height-200; // Y position (fixed for now)
+
+        let img_x_high = canvas.width - car_low.width*2; // Starting X position
+        let img_y_high = 200 - car_low.height ; // Y poition (fixed for now)
+
+        // Speed of movement (change this for faster or slower movement)
+        const speed = .1;
+        car_low.onload = function() {
+            // Start the animation loop
+            animate();
+        };
+
+        // Draw yellow rectangle
+        function animate() {
+    // Clear the canvas to prevent old images from stacking up
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#202920';
+        ctx.fillRect(0, 0, canvas.width, 600);
+
+        ctx.fillStyle = '#EEC97A';
+        ctx.fillRect(0, 20, canvas.width, 30);
+
+        ctx.fillRect(0, canvas.height/2 - 15, canvas.width, 30);
+        ctx.fillRect(0, canvas.height - 50, canvas.width, 30);
+
+        // Draw the image at its current position
+        ctx.drawImage(car_low, img_x_low, img_y_low, car_low.width *.3, car_low.height *.3);
+        ctx.drawImage(car_high, img_x_high, 200-car_high.height*.3, -car_low.width *.3, car_low.height *.3);
+        // Update the position of the image (move it to the right)
+        img_x_low += speed;
+        img_x_high -= speed;
+        requestAnimationFrame(animate);
+
+        }
+
+        
     </script>
-  </head>
-  <body>
-    <main class="game-container">
-      <header class="game-header">
-        <div class="header-background"></div>
-        <h1 class="game-title">Meet Me Halfway</h1>
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6285e47162c89b7eb61eb5c7255dd68a9e075690" alt="Game header decoration" class="header-image" />
-      </header>
-
-      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0ae12c1cbb54df5653cd9163881b68bf79ec974b" alt="Road background" class="road-image" />
-
-      <section class="question-container">
-        <h2 class="question-text">Question sample</h2>
-      </section>
-
-      <div class = "road-marker2"></div>
-      <div class="road-marker"></div>
-      <div class = "road-marker3"></div>
-      
-
-      <section class="options-container">
-        <button class="option-button">Option 1</button>
-        <button class="option-button">Option 2</button>
-        <button class="option-button">Option 3</button>
-      </section>
-    </main>
   </body>
 </html>
