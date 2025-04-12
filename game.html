@@ -165,7 +165,7 @@
         let person_x_high = 0; // Starting   X position
         let person_y_high = 50 - person_high.height ; // Y poition (fixed for now)
         // Speed of movement (change this for faster or slower movement)
-        let speed = 10; //change back to 0.1
+        let speed = 0.1; //change back to 0.1
         let lastTime = 0;
         let lastActionTime = 0
         car_low.onload = function() {
@@ -185,7 +185,11 @@
 
        function endGame(){
         if (gameOver) {
-            ctx.fillRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillText("Game Over! You failed to find love", canvas.width / 2 - 100, canvas.height / 2 - 50);
+          
+                
+                // Clear the canvas
                 spinAngle += 0.1;
                 spinX += spinVX;
                 spinY += spinVY;
@@ -210,7 +214,7 @@
                 ctx.restore();
 
                 requestAnimationFrame(animate);
-                windows.alert("Game Over! You failed to find a match.");
+                
             }
        }
 
@@ -285,14 +289,14 @@
            }
             
            if (person_x_low <= person_x_high) {
-                ctx.fillStyle = "#ff0000"
+                ctx.fillStyle = "#2C543E"
                 ctx.fillRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
                 ctx.font = "50px Centaur";
                 ctx.fillStyle = "#FFFFFF";
                 ctx.fillText("Congratulations!", canvas.width / 2 - 100, canvas.height / 2 - 50);
-                ctx.fillText("You have found love", canvas.width / 2 - 300, canvas.height / 2 + 50);
-                ctx.fillText("Click the header to return home", canvas.width / 2 - 200, canvas.height / 2 + 100);
+                ctx.fillText("You have found love", 500, canvas.height / 2 + 50);
+                ctx.fillText("Click the header to return home", 500, canvas.height / 2 + 100);
                 
                 requestAnimationFrame(animate);
                 return;
