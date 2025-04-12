@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,16 +10,30 @@
     />
     <link rel="stylesheet" href="./styleLogin.css" />
   </head>
+  <script>
+
+    let age = 30
+    let name = "Zendaya"
+
+    function saveInfo(){
+      console.log(age)
+      console.log(name)
+    }
+
+  </script>
   <body>
     <div class="login-container">
       <div class="header-banner">
         <div class="header-content">
           <div class="main-title">
-            Meet Me&nbsp; &nbsp; &nbsp; &nbsp; Halfway
+            Meet Me &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Halfway
           </div>
           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6285e47162c89b7eb61eb5c7255dd68a9e075690" alt="Road icon" class="road-icon" />
         </div>
       </div>
+
+
+      <h1>Login Page</h1>
       <div class="form-container">
         <div class="input-wrapper">
           <input
@@ -28,7 +42,8 @@
             class="input-field"
             data-dom-state="input-1"
           />
-          <div class="input-label">username</div>
+          <div class="input-label"></div>
+          
         </div>
         <div class="input-wrapper">
           <input
@@ -37,9 +52,23 @@
             class="input-field"
             data-dom-state="input-2"
           />
-          <div class="input-label">age</div>
+          <div class="input-label"></div>
         </div>
+
+        <main class="main-content">
+          <section class="match-section">
+            <div onclick="saveInfo()" ;onclick="location.href='game.html'" onmouseover="this.style.cursor='pointer'; this.style.transform='scale(1.05)'" onmouseout="this.style.cursor='default'; this.style.transform='scale(1)'">
+              <div class="rotated-square"></div>
+              <p class="match-text">
+                <span>Start the Game!!!</span>
+              </p>
+            </div>
+          </section>
+        </main>
+
+
       </div>
     </div>
+
   </body>
 </html>
