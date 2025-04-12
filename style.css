@@ -25,7 +25,7 @@
   
   .header-background {
     width: 100%;
-    height: 164px;
+    height: 150px;
     box-shadow: 4px 15px 45.9px 76px rgba(201, 240, 201, 0.75);
     background-color: #a0baa1;
   }
@@ -70,6 +70,7 @@
   .rotated-square {
     width: 100%;
     height: 100%;
+    margin-top: 100px;
     border: 5px solid #3e1833;
     transform: rotate(46.076deg);
     background-color: #d9d9d9;
@@ -77,13 +78,13 @@
   
   .match-text {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #000;
     text-align: center;
     font-family: "Golos Text", sans-serif;
-    font-size: 75px;
+    font-size: 70px;
     font-weight: 400;
     line-height: 80px;
     letter-spacing: 0.1px;
@@ -101,13 +102,14 @@
     }
   
     .rotated-square-container {
+      margin-top: 100px;
       width: 250px;
       height: 250px;
     }
   
     .match-text {
-      font-size: 60px;
-      line-height: 65px;
+      font-size: 40px;
+      line-height: 60px;
     }
   }
   
@@ -127,6 +129,7 @@
     }
   
     .rotated-square-container {
+      margin-top: 50px;
       width: 200px;
       height: 200px;
     }
