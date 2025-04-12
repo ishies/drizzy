@@ -186,7 +186,11 @@
        function endGame(){
         if (gameOver) {
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillText("Game Over! You failed to find love", 800, canvas.height / 2 - 50);
+            ctx.fillStyle = "#000000";
+            ctx.font = "50px Georgia";
+            ctx.fillText("Game Over! You failed to find love", 300, canvas.height / 2 - 50);
+            ctx.font = "20px Georgia";
+            ctx.fillText("Click the header to return to home", 300, canvas.height / 2 - 100);
                 // Clear the canvas
                 spinAngle += 0.1;
                 spinX += spinVX;
@@ -212,6 +216,7 @@
                 ctx.restore();
 
                 requestAnimationFrame(animate);
+                return;
                 
             }
        }
