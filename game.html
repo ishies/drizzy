@@ -95,17 +95,25 @@
         const ctx = canvas.getContext('2d');
 
         const car_low = new Image();
-        car_low.src = './components/car.png'; // Replace with your image URL
-
+        car_low.src = './components/car.png';
         const car_high = new Image();
         car_high.src = './components/car2.png';
 
+        const person_low = new Image();
+        person_low.src = './components/icon.png'; 
+
+        const person_high = new Image();
+        person_high.src = './components/icon.png';
         // Image position variables
         let img_x_low = 0; // Starting X position
         let img_y_low = canvas.height-200; // Y position (fixed for now)
         let img_x_high = canvas.width - car_low.width*2; // Starting X position
         let img_y_high = 200 - car_low.height ; // Y poition (fixed for now)
 
+        let person_x_low =  canvas.width - 250; // Starting X position
+        let person_y_low = canvas.height-280; // Y position (fixed for now)
+        let person_x_high = 0; // Starting   X position
+        let person_y_high = 50 - person_high.height ; // Y poition (fixed for now)
         // Speed of movement (change this for faster or slower movement)
         const speed = .1;
         car_low.onload = function() {
@@ -131,6 +139,9 @@
             // Draw the image at its current position
             ctx.drawImage(car_low, img_x_low, img_y_low, car_low.width *.3, car_low.height *.3);
             ctx.drawImage(car_high, img_x_high, 200-car_high.height*.3, -car_low.width *.3, car_low.height *.3);
+
+            ctx.drawImage(person_high, person_x_high, person_y_high, person_low.width*.3 , person_low.height*.3);
+            ctx.drawImage(person_low, person_x_low, person_y_low, person_low.width*.3, person_low.height*.3);
             // Update the position of the image (move it to the right)
             img_x_low += speed;
             img_x_high -= speed;
