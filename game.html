@@ -172,7 +172,6 @@
             // Start the animation loop
             game_over = false;
             animate();
-            playSound(0.1);
             // Set the question text
         };
 
@@ -207,15 +206,8 @@
                 requestAnimationFrame(animate);
                 return;
         }
-        var sound = new Audio("./components/C.mpe");
-        sound.preload = 'auto';
-        sound.load();
 
-        function playSound(volume) {
-        var click=sound.cloneNode();
-        click.volume=volume;
-        click.play();
-    }
+
         // Draw yellow rectangle
         function animate(timestamp) {
           let deltaTime = timestamp - lastTime;
@@ -237,6 +229,34 @@
 
             ctx.fillRect(0, canvas.height/2 - 15, canvas.width, 30);
             ctx.fillRect(0, canvas.height - 50, canvas.width, 30);
+
+            //if the game is over, spin everything out
+            if (gameOver) {
+                spinAngle += 0.1;
+                spinX += spinVX;
+                spinY += spinVY;
+                spinScale *= 0.98;
+
+                // spin first
+                ctx.save();
+                ctx.translate(person_x_high, person_y_high);
+                ctx.rotate(spinAngle);
+                ctx.scale(spinScale, spinScale);
+                ctx.drawImage(person_high, -person_high.width * 0.15, -person_high.height * 0.15, person_high.width * 0.3, person_high.height * 0.3);
+                ctx.restore();
+
+                // spin second
+                ctx.save();
+                ctx.translate(person_x_low, person_y_low);
+                ctx.rotate(spinAngle);
+                ctx.scale(spinScale, spinScale);
+                ctx.drawImage(person_low, -person_low.width * 0.15, -person_low.height * 0.15, person_low.width * 0.3, person_low.height * 0.3);
+                ctx.restore();
+
+                requestAnimationFrame(animate);
+                return;
+
+            }
             
             // Draw the image at its current position
             ctx.drawImage(car_low, img_x_low, img_y_low, car_low.width *.3, car_low.height *.3);
@@ -273,12 +293,11 @@
             }
             
             
+
             if (img_x_low >= person_x_low - 10 || img_x_high <= person_x_high + 10) {
-                window.alert("You have reached the end of the road! You are not a match")
+                //window.alert("You have reached the end of the road! You are not a match")
                 gameOver = true;
-                carCrash();
-                spinX = img_x_low;
-                spinY = img_y_low;
+                
 
                 console.log("end game");
 
@@ -290,22 +309,13 @@
                 ctx.fillText("You have reached the end of the road!", canvas.width / 2 - 300, canvas.height / 2 + 50);
                 ctx.fillText("Click the header to return home", canvas.width / 2 - 200, canvas.height / 2 + 100);
                 
-                currQuestion = 0;
+                requestAnimationFrame(animate);
                 return;
                 
            }
             
            if (person_x_low <= person_x_high) {
-                window.alert("LOVE")
-                ctx.fillStyle = "#ff0000"
-                ctx.fillRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-                ctx.font = "50px Centaur";
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fillText("Congratulations! You've found love", canvas.width / 2 - 100, canvas.height / 2 - 50);
-                ctx.fillText("You have reached the end of the road!", canvas.width / 2 - 300, canvas.height / 2 + 50);
-                ctx.fillText("Click the header to return home", canvas.width / 2 - 200, canvas.height / 2 + 100);
-                currQuestion = 0;
-                return;
+            window.alert("love")
             }
           
             requestAnimationFrame(animate);
