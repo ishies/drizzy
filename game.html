@@ -108,23 +108,20 @@
 
     
 
-        function checkAnswer(ansChoice){ //input is the iindex for their choice
+        function checkAnswer(ansChoice){ //input is the index for their choice
             //generate a random number 0-2 for the computer's answer
             ansIndex = Math.floor(Math.random() * 3);
 
             if(ansChoice == ansIndex){
                 console.log(ansIndex)
-          
-            person_x_high += 200;
-            person_x_low -= 200;
+                person_x_high += 180;
+                person_x_low -= 180;
+                speed -= .1
             }
-            
             else {
-              speed *= 30;
+              speed += .2;
             }
-              
-            
-            
+            // currQuestion++;      
         }
         
 
@@ -142,6 +139,11 @@
         const person_high = new Image();
         person_high.src = './components/icon.png';
 
+        let angle = 0;
+        let vx = 2;  // horizontal speed
+        let vy = -1; // vertical speed
+        let scale = 1;
+
         // Game booleans
         let selected = false;
 
@@ -157,16 +159,40 @@
         let person_y_high = 50 - person_high.height ; // Y poition (fixed for now)
         // Speed of movement (change this for faster or slower movement)
         let speed = .1;
+        let lastTime = 0;
+        let lastActionTime = 0
         car_low.onload = function() {
             // Start the animation loop
             animate();
             // Set the question text
         };
 
+        function carCrash(){
+            console.log("car crash");
+            angle += 0.1;
+            x += vx;
+            y += vy;
+            scale *= 0.99;
+
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.scale(scale, scale);
+            ctx.drawImage(img, -img.width / 2, -img.height / 2);
+            ctx.restore();
+        }
+
         // Draw yellow rectangle
-        function animate() {
-            //AD  N
-        // Clear the canvas to prevent old images from stacking up
+        function animate(timestamp) {
+          let deltaTime = timestamp - lastTime;
+          lastTime = timestamp;
+          if (timestamp - lastActionTime >= 6000) {
+              currQuestion ++;
+              lastActionTime = timestamp; // Update last action time
+              selected = false;
+            }            //AD  N
+       
+            // Clear the canvas to prevent old images from stacking up
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = '#202920';
@@ -197,24 +223,35 @@
 
                 ctx.fillStyle = "#000000";
                 ctx.font = "20px Georgia";
-                ctx.fillText("Option One", 325, 350) //text, x, y
-                ctx.fillText("Option Two", 725, 350)
-                ctx.fillText("Option Three", 1125, 350)
+                ctx.fillText(answerList[currQuestion][0], 325, 350) //text, x, y
+                ctx.fillText(answerList[currQuestion][1], 725, 350)
+                ctx.fillText(answerList[currQuestion][2], 1125, 350)
                 ctx.font = "50px Georgia"
-                ctx.fillText("Question", 280, 125) //question box
-
+                ctx.fillText(questionList[currQuestion], 280, 125) //question box
             }
+            
+            
 
-            if (img_x_low >= person_x_low || img_x_high <= person_x_high) {
-              window.alert("You have reached the end of the road!")
-              console.log("end game");
-              // Stop the animation loop
-              return;
+            if (img_x_low >= person_x_low - 10 || img_x_high <= person_x_high + 10) {
+                window.alert("You have reached the end of the road!")
+                person_low.carCrash();
+                person_high.carCrash();
+
+                
+                console.log("end game");
+                // Stop the animation loop
+                return;
+                location.href='home.html'
            }
             
-            setInterval(selected = false, 7000)
+           if (person_x_low <= person_x_high) {
+            window.alert("love")
+           }
             requestAnimationFrame(animate);
         }
+    
+
+
 
         canvas.addEventListener('click', function(event) {
           console.log('Canvas clicked!');
