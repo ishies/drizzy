@@ -186,9 +186,7 @@
        function endGame(){
         if (gameOver) {
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillText("Game Over! You failed to find love", canvas.width / 2 - 100, canvas.height / 2 - 50);
-          
-                
+            ctx.fillText("Game Over! You failed to find love", 800, canvas.height / 2 - 50);
                 // Clear the canvas
                 spinAngle += 0.1;
                 spinX += spinVX;
@@ -252,8 +250,6 @@
             //shift the text boxes along too
             ctx.fillStyle = "#FFFFFF";
             ctx.font = "20px Georgia";
-            ctx.fillText(name, person_x_high, person_y_high);
-            ctx.fillText("Kevin <3", person_x_low, person_y_low);
             
             // Update the position of the image (move it to the right)
             img_x_low += speed;
@@ -281,6 +277,7 @@
 
             if (img_x_low >= person_x_low - 10 || img_x_high <= person_x_high + 10) {
                 gameOver = true;
+                ctx.fillText("Game Over! You failed to find love", 800, canvas.height / 2 - 50);
                 endGame();
 
                 console.log("final if ran")
