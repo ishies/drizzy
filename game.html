@@ -61,9 +61,9 @@
       
 
       <section class="options-container">
-        <button class="option-button">Option 1</button>
-        <button class="option-button">Option 2</button>
-        <button class="option-button">Option 3</button>
+        <button id = "option1" class="option-button" onLoad = "playGame()" onClick="saveChoice()">Option 1</button>
+        <button id = "option2" class="option-button" onClick="saveChoice()">Option 2</button>
+        <button id = "option3" class="option-button" onclick="saveChoice()">Option 3</button>
       </section> -->
     </main>
 
@@ -85,11 +85,48 @@
                     ["Accept your fate and photosynthesize in peace", "Communicate through leaf rustling Morse code", "Start dropping leaves dramatically when someone ignores you"],
                     ["You keep whisper-yelling “PLAGUE!!!” during historical fiction readings", "You tried to check out a cursed book that bit someone", "You got too emotionally attached to a book and threw it a birthday party"],
                     ["Processing... please wait... or don’t, whatever.", "99% complete. Never finishes.", "Just elevator music and a slowly spinning croissant"]];
-         
-
-
+        let currQuestion = 0;
         let receivedValue = localStorage.getItem("name");
+        
+
+
         console.log(receivedValue + " from local storage"); 
+
+
+        
+    
+        function generateChoices(){ //do this onLoad??
+            document.getElementById('option1').innerHTML = answerList[currQuestion][0];
+            document.getElementById('option2').innerHTML = answerList[currQuestion][1];
+            document.getElementById('option3').innerHTML = answerList[currQuestion][2];
+            console.log(answerList[currQuestion][0]);
+        }
+
+        function playGame(){ 
+            currQuestion ++;
+        }
+
+    
+
+        function checkAnswer(ansChoice){ //input is the iindex for their choice
+            //generate a random number 0-2 for the computer's answer
+            ansIndex = Math.floor(Math.random() * 3);
+
+            if(ansChoice == ansIndex){
+                console.log(ansIndex)
+          
+            person_x_high += 200;
+            person_x_low -= 200;
+            }
+            
+            else {
+              speed *= 30;
+            }
+              
+            
+            
+        }
+        
 
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
@@ -104,6 +141,10 @@
 
         const person_high = new Image();
         person_high.src = './components/icon.png';
+
+        // Game booleans
+        let selected = false;
+
         // Image position variables
         let img_x_low = 0; // Starting X position
         let img_y_low = canvas.height-200; // Y position (fixed for now)
@@ -115,7 +156,7 @@
         let person_x_high = 0; // Starting   X position
         let person_y_high = 50 - person_high.height ; // Y poition (fixed for now)
         // Speed of movement (change this for faster or slower movement)
-        const speed = .1;
+        let speed = .1;
         car_low.onload = function() {
             // Start the animation loop
             animate();
@@ -124,11 +165,12 @@
 
         // Draw yellow rectangle
         function animate() {
+            //AD  N
         // Clear the canvas to prevent old images from stacking up
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = '#202920';
-            ctx.fillRect(0, 0, canvas.width, 600);
+            ctx.fillRect(0, 0, canvas.width, 800);
 
             ctx.fillStyle = '#EEC97A';
             ctx.fillRect(0, 20, canvas.width, 30);
@@ -145,9 +187,55 @@
             // Update the position of the image (move it to the right)
             img_x_low += speed;
             img_x_high -= speed;
+            if (!selected){ 
+                ctx.fillStyle = '#FCD1CC';
+                ctx.fillRect(200, 300, 350, 200); //x, y, width, height
+                ctx.fillRect(600, 300, 350, 200);
+                ctx.fillRect(1000, 300, 350, 200);
+                ctx.fillRect(275, 10, 1000, 200); //question box
+                
+
+                ctx.fillStyle = "#000000";
+                ctx.font = "20px Georgia";
+                ctx.fillText("Option One", 325, 350) //text, x, y
+                ctx.fillText("Option Two", 725, 350)
+                ctx.fillText("Option Three", 1125, 350)
+                ctx.font = "50px Georgia"
+                ctx.fillText("Question", 280, 125) //question box
+
+            }
+
+            if (img_x_low >= person_x_low || img_x_high <= person_x_high) {
+              window.alert("You have reached the end of the road!")
+              console.log("end game");
+              // Stop the animation loop
+              return;
+           }
+            
+            setInterval(selected = false, 7000)
             requestAnimationFrame(animate);
         }
 
+        canvas.addEventListener('click', function(event) {
+          console.log('Canvas clicked!');
+          x = event.clientX - canvas.getBoundingClientRect().left;
+          y = event.clientY - canvas.getBoundingClientRect().top;
+          console.log('X: ' + x + ', Y: ' + y);
+
+          if (x > 200 && x < 550 && y > 300 && y < 500) {
+            console.log('Option One clicked!');
+            selected = true;
+            checkAnswer(0);
+          } else if (x > 600 && x < 950 && y > 300 && y < 500) {
+            console.log('Option Two clicked!');
+            selected = true;
+            checkAnswer(1);
+          } else if (x > 1000 && x < 1350 && y > 300 && y < 500) {
+            console.log('Option Three clicked!');
+            selected = true;
+            checkAnswer(2);
+          }
+        })
         
     </script>
   </body>
