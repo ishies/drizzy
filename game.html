@@ -88,7 +88,7 @@
          
 
 
-          let receivedValue = localStorage.getItem("name");
+        let receivedValue = localStorage.getItem("name");
         console.log(receivedValue + " from local storage"); 
 
         const canvas = document.getElementById('gameCanvas');
@@ -103,7 +103,6 @@
         // Image position variables
         let img_x_low = 0; // Starting X position
         let img_y_low = canvas.height-200; // Y position (fixed for now)
-
         let img_x_high = canvas.width - car_low.width*2; // Starting X position
         let img_y_high = 200 - car_low.height ; // Y poition (fixed for now)
 
@@ -112,30 +111,30 @@
         car_low.onload = function() {
             // Start the animation loop
             animate();
+            // Set the question text
         };
 
         // Draw yellow rectangle
         function animate() {
-    // Clear the canvas to prevent old images from stacking up
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Clear the canvas to prevent old images from stacking up
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#202920';
-        ctx.fillRect(0, 0, canvas.width, 600);
+            ctx.fillStyle = '#202920';
+            ctx.fillRect(0, 0, canvas.width, 600);
 
-        ctx.fillStyle = '#EEC97A';
-        ctx.fillRect(0, 20, canvas.width, 30);
+            ctx.fillStyle = '#EEC97A';
+            ctx.fillRect(0, 20, canvas.width, 30);
 
-        ctx.fillRect(0, canvas.height/2 - 15, canvas.width, 30);
-        ctx.fillRect(0, canvas.height - 50, canvas.width, 30);
+            ctx.fillRect(0, canvas.height/2 - 15, canvas.width, 30);
+            ctx.fillRect(0, canvas.height - 50, canvas.width, 30);
 
-        // Draw the image at its current position
-        ctx.drawImage(car_low, img_x_low, img_y_low, car_low.width *.3, car_low.height *.3);
-        ctx.drawImage(car_high, img_x_high, 200-car_high.height*.3, -car_low.width *.3, car_low.height *.3);
-        // Update the position of the image (move it to the right)
-        img_x_low += speed;
-        img_x_high -= speed;
-        requestAnimationFrame(animate);
-
+            // Draw the image at its current position
+            ctx.drawImage(car_low, img_x_low, img_y_low, car_low.width *.3, car_low.height *.3);
+            ctx.drawImage(car_high, img_x_high, 200-car_high.height*.3, -car_low.width *.3, car_low.height *.3);
+            // Update the position of the image (move it to the right)
+            img_x_low += speed;
+            img_x_high -= speed;
+            requestAnimationFrame(animate);
         }
 
         
